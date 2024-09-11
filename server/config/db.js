@@ -10,10 +10,10 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
 
 sequelize.authenticate()
     .then(() => {
-        console.log("Success remote database")
+        console.log("Success connect to database")
     })
-    .catch((e) => {
-        console.error(e.message)
+    .catch((error) => {
+        console.error(error.message)
     })
 
 module.exports = sequelize

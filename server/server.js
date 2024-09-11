@@ -9,24 +9,25 @@ const Category = require("./models/categoryModel.js")
 const Transaction = require("./models/transactionModel.js")
 
 const categoryRoute = require("./routes/categoryRoute.js")
-const transactionRoute = require("./routes/transactionRoute.js")
+const transactionRoute = require("./routes/transactionRoute.js");
 
 
 sequelize.sync({ force: false }).then(() => {
     console.log('Database and tables synced')
 })
-    .catch(e => {
-        console.error(`Error syncing database : ${e}`)
+    .catch(error => {
+        console.error(`Error syncing database : ${error}`)
     })
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
-app.use('/categories', categoryRoute);
-app.use('/transactions', transactionRoute);
+app.use('/', categoryRoute);
+app.use('/', transactionRoute);
 
 
-process.on('uncaughtException', err => {
+
+process.on('uncaughtException', err   => {
     console.log('UNCAUGHT EXCEPTION! Shutting down...');
     console.log(err.name, err.message);
     process.exit(1);
